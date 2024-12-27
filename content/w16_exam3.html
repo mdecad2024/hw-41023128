@@ -2,7 +2,7 @@
         <head>
         <title>cad_hw</title>
         <meta charset="utf-8">
-<meta property="head" content="H2">
+<meta property="head" content="H3">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/css/bootstrap.min.css">
@@ -141,12 +141,74 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">HW4 << <a href='HW4.html'>Previous</a> <a href='Final Report.html'>Next</a> >> Final Report<br /><h1>HW4_Exam</h1>
-<p>與 HW4 內容相近的模擬場景題目, 隨堂進行考試.</p>
-<p>建立模擬場景操作過程影片如下:</p>
-<p style="padding-left: 30px;">請將操作影片嵌入 ......</p>
-<p style="padding-left: 30px;">所完成的模擬場景與控制程式檔案下載</p>
-<br />HW4 << <a href='HW4.html'>Previous</a> <a href='Final Report.html'>Next</a> >> Final Report</div>
+    <div id="tipue_search_content">w16_exam2 << <a href='w16_exam2.html'>Previous</a> <a href='HW3.html'>Next</a> >> HW3<br /><h1>w16_exam3</h1>
+<p style="padding-left: 30px;"><span></span></p>
+<script type="text/javascript">
+var viewers = [];
+
+function getOptions() {
+    var mc = document.getElementById("mdlClr").value;
+    var bc1 = document.getElementById("bckClr1").value;
+    var bc2 = document.getElementById("bckClr2").value;
+    var ren = document.getElementById("render").value;
+    var def = document.getElementById("defini").value;
+    return {ModelColor: mc, BackgroundColor1: bc1, BackgroundColor2: bc2, RenderMode: ren, Definition: def};
+}
+
+function readSTLfile(opt, canvasId) {
+    var canvas = document.getElementById(canvasId);
+    var viewer = new JSC3D.Viewer(canvas);
+    viewer.setParameter('SceneUrl', opt.SceneUrl);
+    viewer.setParameter('InitRotationX', 0);
+    viewer.setParameter('InitRotationY', 0);
+    viewer.setParameter('InitRotationZ', 0);
+    viewer.setParameter('ModelColor', opt.ModelColor);
+    viewer.setParameter('BackgroundColor1', opt.BackgroundColor1);
+    viewer.setParameter('BackgroundColor2', opt.BackgroundColor2);
+    viewer.setParameter('RenderMode', opt.RenderMode);
+    viewer.setParameter('Definition', opt.Definition);
+    viewer.setParameter('MouseHandler', 'default'); // 啟用鼠標交互
+    viewer.setParameter('Renderer', 'webgl'); // 使用 WebGL 渲染模式
+    viewer.init();
+    viewer.update();
+    viewers.push(viewer);
+}
+
+function changeOption(strOpt, strValue) {
+    console.log("change " + strOpt + " to " + strValue);
+    viewers.forEach(viewer => {
+        viewer.setParameter(strOpt, strValue);
+        viewer.init();
+        viewer.update();
+    });
+}
+
+function openByUrl() {
+    var url = document.getElementById("url").value;
+    var opt = getOptions();
+    opt.SceneUrl = url;
+    readSTLfile(opt, 'cv1');
+    readSTLfile(opt, 'cv2');
+    readSTLfile(opt, 'cv3');
+    readSTLfile(opt, 'cv4');
+}
+
+function openByGet() {
+    var urls = [
+        "https://s104.cycu.org/~41023128/26.stl",
+        "https://s104.cycu.org/~41023128/28.stl", // 修正了拼寫
+        "https://s104.cycu.org/~41023128/30.stl",
+        "https://s104.cycu.org/~41023128/32.stl"
+    ];
+    var opt = getOptions();
+    urls.forEach((url, index) => {
+        opt.SceneUrl = url;
+        readSTLfile(opt, 'cv' + (index + 1));
+    });
+}
+
+openByGet();
+</script><br />w16_exam2 << <a href='w16_exam2.html'>Previous</a> <a href='HW3.html'>Next</a> >> HW3</div>
         
     <!-- footer -->
       <div class="container">
